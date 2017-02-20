@@ -7,20 +7,17 @@
 //
 
 #import "LYViewController.h"
-#import "UIImage+LTQR.h"
-#import "LTQRScanManager.h"
-#import "LTScanCoverView.h"
+
+#import "ReadQRVC.h"
+#import "ScanQRVC.h"
+#import "WriteQRVC.h"
 
 @interface LYViewController (){
 
     
 }
 
-@property (weak, nonatomic) IBOutlet UITextField *TF;
-@property (weak, nonatomic) IBOutlet UIImageView *image;
 
-@property (strong, nonatomic) LTQRScanManager *scanManager;
-@property (weak, nonatomic) IBOutlet LTScanCoverView *maskView;
 
 @end
 
@@ -30,76 +27,35 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
-    [self.scanManager lt_startRunning];
-    [self.maskView lt_startRunning];
+    self.navigationController.navigationBar.translucent = NO;
+
 }
 
--(LTQRScanManager *)scanManager{
-
-    if (!_scanManager) {
-        
-        _scanManager = [LTQRScanManager LT_ShowInView:self.view];
-        __weak typeof(self)weakSelf = self;
-        [_scanManager setBlockDidDecodeResult:^(LTQRScanManager *manager, NSString *result) {
-            
-            [manager lt_stopRunning];
-            [weakSelf.maskView lt_stopRunning];
-            weakSelf.TF.text = result;
-        }];
-    }
-    return _scanManager;
+- (IBAction)writeQR:(id)sender {
+    
+    WriteQRVC *vc = [[WriteQRVC alloc]initWithNibName:@"WriteQRVC"
+                                               bundle:nil];
+    
+    [self.navigationController pushViewController:vc
+                                         animated:YES];
+    
 }
-
--(void)touchesBegan:(NSSet<UITouch *> *)touches
-          withEvent:(UIEvent *)event{
-
-    [self startScan];
+- (IBAction)readQR:(id)sender {
+    
+    ReadQRVC *vc = [[ReadQRVC alloc]initWithNibName:@"ReadQRVC"
+                                               bundle:nil];
+    
+    [self.navigationController pushViewController:vc
+                                         animated:YES];
+    
 }
-
-- (void)startScan{
+- (IBAction)sacnQR:(id)sender {
     
-    if (self.scanManager.isScanning) {
-        
-        [self.scanManager lt_stopRunning];
-        [self.maskView lt_stopRunning];
-    }
-    else{
+    ScanQRVC *vc = [[ScanQRVC alloc]initWithNibName:@"ScanQRVC"
+                                               bundle:nil];
     
-        [self.scanManager lt_startRunning];
-        [self.maskView lt_startRunning];
-    }
+    [self.navigationController pushViewController:vc
+                                         animated:YES];
+    
 }
-
-- (IBAction)truchAction:(id)sender {
-    
-    [self.scanManager lt_turnOnTorch:!self.scanManager.isTorchActive];
-}
-
-
--(void)getQRImage{
-
-    CGFloat width = [self.TF.text doubleValue];
-    
-    if (width < 50.0) {
-        width = 50.0;
-    }
-    UIImage *imageData = [UIImage LT_QRImageWithContentString:@"开啥玩笑啊"
-                                                  defaultSize:width];
-    
-    self.image.image = imageData;
-    
-    
-    NSData *data = UIImageJPEGRepresentation(imageData, 1.0);
-    UIImage *imageI = [UIImage imageWithData:data];
-    NSString *content = [imageData lt_qrContentFromQRImage];
-    NSLog(@"content=%@",content);
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 @end

@@ -22,8 +22,13 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
-		6364D6251E55639000EBE312 /* big_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6364D6241E55639000EBE312 /* big_logo@2x.png */; };
 		6364D6271E5587B700EBE312 /* QR.png in Resources */ = {isa = PBXBuildFile; fileRef = 6364D6261E5587B700EBE312 /* QR.png */; };
+		636503901E5ABB6100CDB70B /* ReadQRVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6365038E1E5ABB6100CDB70B /* ReadQRVC.m */; };
+		636503911E5ABB6100CDB70B /* ReadQRVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6365038F1E5ABB6100CDB70B /* ReadQRVC.xib */; };
+		636503951E5ABE5500CDB70B /* ScanQRVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 636503931E5ABE5500CDB70B /* ScanQRVC.m */; };
+		636503961E5ABE5500CDB70B /* ScanQRVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636503941E5ABE5500CDB70B /* ScanQRVC.xib */; };
+		6365039A1E5AC3EF00CDB70B /* WriteQRVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 636503981E5AC3EF00CDB70B /* WriteQRVC.m */; };
+		6365039B1E5AC3EF00CDB70B /* WriteQRVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636503991E5AC3EF00CDB70B /* WriteQRVC.xib */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 /* End PBXBuildFile section */
@@ -62,8 +67,16 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		6364D6241E55639000EBE312 /* big_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "big_logo@2x.png"; sourceTree = "<group>"; };
 		6364D6261E5587B700EBE312 /* QR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QR.png; sourceTree = "<group>"; };
+		6365038D1E5ABB6100CDB70B /* ReadQRVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadQRVC.h; sourceTree = "<group>"; };
+		6365038E1E5ABB6100CDB70B /* ReadQRVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadQRVC.m; sourceTree = "<group>"; };
+		6365038F1E5ABB6100CDB70B /* ReadQRVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReadQRVC.xib; sourceTree = "<group>"; };
+		636503921E5ABE5500CDB70B /* ScanQRVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanQRVC.h; sourceTree = "<group>"; };
+		636503931E5ABE5500CDB70B /* ScanQRVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanQRVC.m; sourceTree = "<group>"; };
+		636503941E5ABE5500CDB70B /* ScanQRVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScanQRVC.xib; sourceTree = "<group>"; };
+		636503971E5AC3EF00CDB70B /* WriteQRVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriteQRVC.h; sourceTree = "<group>"; };
+		636503981E5AC3EF00CDB70B /* WriteQRVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriteQRVC.m; sourceTree = "<group>"; };
+		636503991E5AC3EF00CDB70B /* WriteQRVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WriteQRVC.xib; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		82A02B7F48B4D522948F40A5 /* Pods-LTQRManager_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LTQRManager_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LTQRManager_Tests/Pods-LTQRManager_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -142,8 +155,10 @@
 				6003F5A5195388D20070C39A /* LYViewController.h */,
 				6003F5A6195388D20070C39A /* LYViewController.m */,
 				6364D6261E5587B700EBE312 /* QR.png */,
-				6364D6241E55639000EBE312 /* big_logo@2x.png */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
+				6365038A1E5ABB5000CDB70B /* ReadQRVC */,
+				6365038B1E5ABB5000CDB70B /* ScanQRVC */,
+				6365038C1E5ABB5000CDB70B /* WriteQRVC */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -189,6 +204,36 @@
 				14179939F38FB12793A7180D /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		6365038A1E5ABB5000CDB70B /* ReadQRVC */ = {
+			isa = PBXGroup;
+			children = (
+				6365038D1E5ABB6100CDB70B /* ReadQRVC.h */,
+				6365038E1E5ABB6100CDB70B /* ReadQRVC.m */,
+				6365038F1E5ABB6100CDB70B /* ReadQRVC.xib */,
+			);
+			path = ReadQRVC;
+			sourceTree = "<group>";
+		};
+		6365038B1E5ABB5000CDB70B /* ScanQRVC */ = {
+			isa = PBXGroup;
+			children = (
+				636503921E5ABE5500CDB70B /* ScanQRVC.h */,
+				636503931E5ABE5500CDB70B /* ScanQRVC.m */,
+				636503941E5ABE5500CDB70B /* ScanQRVC.xib */,
+			);
+			path = ScanQRVC;
+			sourceTree = "<group>";
+		};
+		6365038C1E5ABB5000CDB70B /* WriteQRVC */ = {
+			isa = PBXGroup;
+			children = (
+				636503971E5AC3EF00CDB70B /* WriteQRVC.h */,
+				636503981E5AC3EF00CDB70B /* WriteQRVC.m */,
+				636503991E5AC3EF00CDB70B /* WriteQRVC.xib */,
+			);
+			path = WriteQRVC;
 			sourceTree = "<group>";
 		};
 		7F2FE1F3AA7FBB73DB53BF5B /* Pods */ = {
@@ -289,11 +334,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				636503961E5ABE5500CDB70B /* ScanQRVC.xib in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
+				636503911E5ABB6100CDB70B /* ReadQRVC.xib in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				6364D6271E5587B700EBE312 /* QR.png in Resources */,
+				6365039B1E5AC3EF00CDB70B /* WriteQRVC.xib in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
-				6364D6251E55639000EBE312 /* big_logo@2x.png in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -407,6 +454,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* LYAppDelegate.m in Sources */,
+				6365039A1E5AC3EF00CDB70B /* WriteQRVC.m in Sources */,
+				636503951E5ABE5500CDB70B /* ScanQRVC.m in Sources */,
+				636503901E5ABB6100CDB70B /* ReadQRVC.m in Sources */,
 				6003F5A7195388D20070C39A /* LYViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);

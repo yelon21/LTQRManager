@@ -25,7 +25,7 @@
     return [UIImage LT_QRImageWithContentString:content
                                     defaultSize:width
                                 foregroundColor:[CIColor colorWithRed:0 green:0 blue:0 alpha:1]
-                                backgroundColor:[CIColor colorWithRed:1 green:1 blue:1 alpha:0.01]];
+                                backgroundColor:[CIColor colorWithRed:1 green:1 blue:1 alpha:1]];
 }
 
 /**
