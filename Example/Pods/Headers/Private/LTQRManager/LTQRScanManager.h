@@ -1,0 +1,1 @@
+../../../../../LTQRManager/Classes/LTQRScanManager.h

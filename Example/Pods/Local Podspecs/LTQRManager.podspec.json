@@ -1,0 +1,28 @@
+{
+  "name": "LTQRManager",
+  "version": "0.1.0",
+  "summary": "LTQRManager.",
+  "description": "LTQRManager.",
+  "homepage": "https://github.com/254956982@qq.com/LTQRManager",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "254956982@qq.com": "yl21ly@qq.com"
+  },
+  "source": {
+    "git": "https://github.com/yelon21/LTQRManager.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "source_files": "LTQRManager/Classes/**/*",
+  "resources": "LTQRManager/Assets/*.png",
+  "dependencies": {
+    "ZXingObjC": [
+      "~> 3.1.0"
+    ]
+  }
+}

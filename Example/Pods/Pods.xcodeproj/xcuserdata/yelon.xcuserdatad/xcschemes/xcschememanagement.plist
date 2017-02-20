@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>LTQRManager.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-LTQRManager_Example.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-LTQRManager_Tests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ZXingObjC.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>9DC7C6B9F78B5DF3E85C9F0B8491CEB1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A2FBA6D30FA0BF58B7D36CEAC5FCCF0B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D08E8BD56ABF4EB39AF3C56B54AFB139</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D4339FE65FEF6132D25D0A3DC85268A1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

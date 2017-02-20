@@ -1,0 +1,12 @@
+#use_frameworks!
+
+target 'LTQRManager_Example' do
+    
+  pod 'LTQRManager', :path => '../'
+
+  target 'LTQRManager_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
