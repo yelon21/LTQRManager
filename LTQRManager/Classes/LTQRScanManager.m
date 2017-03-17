@@ -48,6 +48,26 @@
     // 1、获取摄像设备
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
 
+    if ([device lockForConfiguration:nil]) {
+        
+        if ([device isFlashModeSupported:AVCaptureFlashModeAuto]) {
+            [device setFlashMode:AVCaptureFlashModeAuto];
+        }
+        if ([device isFocusModeSupported:AVCaptureFocusModeContinuousAutoFocus]) {
+            
+            [device setFocusMode:AVCaptureFocusModeContinuousAutoFocus];
+        }
+        if ([device isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeAutoWhiteBalance]) {
+            [device setWhiteBalanceMode:AVCaptureWhiteBalanceModeAutoWhiteBalance];
+        }
+        
+        if ([device isExposureModeSupported:AVCaptureExposureModeAutoExpose]) {
+            
+            [device setExposureMode:AVCaptureExposureModeAutoExpose];
+        }
+        
+        [device unlockForConfiguration];
+    }
     // 2、创建输入流
     AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
     
@@ -70,11 +90,33 @@
     
     // 6、设置输出数据类型，需要将元数据输出添加到会话后，才能指定元数据类型，否则会报错
     // 设置扫码支持的编码格式(如下设置条形码和二维码兼容)
-    output.metadataObjectTypes = @[AVMetadataObjectTypeQRCode, AVMetadataObjectTypeEAN13Code,  AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code];
+    NSMutableArray *metadataObjectTypes = [[NSMutableArray alloc]init];
     
+    [metadataObjectTypes addObject:AVMetadataObjectTypeQRCode];
+    
+    [metadataObjectTypes addObject:AVMetadataObjectTypeEAN13Code];
+    [metadataObjectTypes addObject:AVMetadataObjectTypeEAN8Code];
+    [metadataObjectTypes addObject:AVMetadataObjectTypeCode128Code];
+    
+    [metadataObjectTypes addObject:AVMetadataObjectTypeUPCECode];
+    [metadataObjectTypes addObject:AVMetadataObjectTypeCode39Code];
+    [metadataObjectTypes addObject:AVMetadataObjectTypeCode39Mod43Code];
+    
+    [metadataObjectTypes addObject:AVMetadataObjectTypePDF417Code];
+    [metadataObjectTypes addObject:AVMetadataObjectTypeAztecCode];
+    [metadataObjectTypes addObject:AVMetadataObjectTypeCode39Mod43Code];
+    
+
+    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1){
+    
+        [metadataObjectTypes addObject:AVMetadataObjectTypeInterleaved2of5Code];
+        [metadataObjectTypes addObject:AVMetadataObjectTypeITF14Code];
+        [metadataObjectTypes addObject:AVMetadataObjectTypeDataMatrixCode];
+    }
+    
+    output.metadataObjectTypes = metadataObjectTypes;
     // 7、实例化预览图层, 传递_session是为了告诉图层将来显示什么内容
     self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-
 }
 
 - (AVCaptureVideoOrientation) videoOrientationFromCurrentDeviceOrientation {
@@ -96,6 +138,7 @@
         }
     }
 }
+
 + (id)LT_ShowInView:(UIView *)view{
 
     if (!view || ![view isKindOfClass:[UIView class]]) {
@@ -218,12 +261,14 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
         return;
     }
     
-    [device lockForConfiguration:nil];
-    if (on) {
-        [device setTorchMode:AVCaptureTorchModeOn];
-    } else {
-        [device setTorchMode: AVCaptureTorchModeOff];
+    if ([device lockForConfiguration:nil]) {
+        
+        if (on) {
+            [device setTorchMode:AVCaptureTorchModeOn];
+        } else {
+            [device setTorchMode: AVCaptureTorchModeOff];
+        }
+        [device unlockForConfiguration];
     }
-    [device unlockForConfiguration];
 }
 @end

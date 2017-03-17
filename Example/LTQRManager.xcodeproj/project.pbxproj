@@ -586,6 +586,7 @@
 			baseConfigurationReference = 94FAF30FAD93CDE91DCB5031 /* Pods-LTQRManager_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = U7DFNWQBUU;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LTQRManager/LTQRManager-Prefix.pch";
@@ -604,6 +605,7 @@
 			baseConfigurationReference = 96E1F808A5E7B13A265BFC67 /* Pods-LTQRManager_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LTQRManager/LTQRManager-Prefix.pch";

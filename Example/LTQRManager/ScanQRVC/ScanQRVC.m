@@ -23,8 +23,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self.scanManager lt_startRunning];
-    [self.maskView lt_startRunning];
+    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo
+                             completionHandler:^(BOOL granted) {
+                                 
+                                 if (granted) {
+                                     
+                                     [self.scanManager lt_startRunning];
+                                     [self.maskView lt_startRunning];
+                                 }
+                                 else{
+                                     
+                                     NSLog(@"未授权访问摄像头");
+                                 }
+                             }];
 }
 
 -(void)viewDidLayoutSubviews{
@@ -56,8 +67,20 @@
 
 - (void)startScan{
     
-    [self.scanManager lt_startRunning];
-    [self.maskView lt_startRunning];
+    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo
+                             completionHandler:^(BOOL granted) {
+                                 
+                                 if (granted) {
+                                     
+                                     [self.scanManager lt_startRunning];
+                                     [self.maskView lt_startRunning];
+                                 }
+                                 else{
+                                     
+                                     NSLog(@"未授权访问摄像头");
+                                 }
+                             }];
+
 }
 
 @end
