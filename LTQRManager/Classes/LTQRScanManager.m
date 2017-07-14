@@ -124,7 +124,8 @@
     UIInterfaceOrientation interfaceOrientation = [UIApplication sharedApplication].statusBarOrientation;
     switch (interfaceOrientation) {
             
-        case UIInterfaceOrientationPortrait: {
+        case UIInterfaceOrientationPortrait:
+        case UIInterfaceOrientationUnknown:{
             return AVCaptureVideoOrientationPortrait;
         }
         case UIInterfaceOrientationLandscapeLeft: {
@@ -199,7 +200,7 @@
 
 - (void)handleStatusBarOrientationDidChange:(NSNotification *)notification{
     //1.获取 当前设备 实例
-    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+//    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
     
     CALayer *superLayer = self.previewLayer.superlayer;
     

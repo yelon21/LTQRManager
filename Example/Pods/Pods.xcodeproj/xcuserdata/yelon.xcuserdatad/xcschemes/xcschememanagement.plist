@@ -7,7 +7,7 @@
 		<key>LTQRManager.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<true/>
 		</dict>
 		<key>Pods-LTQRManager_Example.xcscheme</key>
 		<dict>
