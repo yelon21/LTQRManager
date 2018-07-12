@@ -61,10 +61,12 @@
             [device setWhiteBalanceMode:AVCaptureWhiteBalanceModeAutoWhiteBalance];
         }
         
-        if ([device isExposureModeSupported:AVCaptureExposureModeAutoExpose]) {
-            
-            [device setExposureMode:AVCaptureExposureModeAutoExpose];
+        if ([device isExposureModeSupported:AVCaptureExposureModeContinuousAutoExposure]) {
+            CGPoint exposurePoint = CGPointMake(0.5f, 0.5f); // 曝光点为中心
+            [device setExposurePointOfInterest:exposurePoint];
+            [device setExposureMode:AVCaptureExposureModeContinuousAutoExposure];
         }
+
         
         [device unlockForConfiguration];
     }

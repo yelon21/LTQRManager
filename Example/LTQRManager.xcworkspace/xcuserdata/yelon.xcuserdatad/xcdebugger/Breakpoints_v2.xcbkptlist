@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../LTQRManager/Classes/LTQRScanManager.m"
-            timestampString = "511442102.758692"
+            timestampString = "553071073.252683"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
             landmarkName = "-lt_turnOnTorch:"
             landmarkType = "7">
          </BreakpointContent>
