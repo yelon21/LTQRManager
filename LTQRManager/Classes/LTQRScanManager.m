@@ -11,13 +11,21 @@
 @interface LTQRScanManager ()<AVCaptureMetadataOutputObjectsDelegate>
 
 /** 会话对象 */
-@property (nonatomic, strong) AVCaptureSession *session;
+@property (nonatomic, strong, readonly) AVCaptureSession *captureSession;
+/** 摄像设备 */
+@property (nonatomic, strong, readonly) AVCaptureDevice *captureDevice;
+/** 输入流 */
+@property (nonatomic, strong, readonly) AVCaptureDeviceInput *captureDeviceInput;
+
 /** 图层类 */
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *previewLayer;
 
 @end
 
 @implementation LTQRScanManager
+@synthesize captureSession = _captureSession;
+@synthesize captureDevice = _captureDevice;
+@synthesize captureDeviceInput = _captureDeviceInput;
 
 -(void)dealloc{
 
@@ -32,46 +40,64 @@
     }
     return self;
 }
+//getter
+-(AVCaptureSession *)captureSession{
+    
+    if (!_captureSession) {
+        
+        _captureSession = [[AVCaptureSession alloc] init];
+    }
+    return _captureSession;
+}
+
+-(AVCaptureDevice *)captureDevice{
+    
+    if (!_captureDevice) {
+        
+        _captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+        
+        if ([_captureDevice lockForConfiguration:nil]) {
+            
+            if ([_captureDevice isFlashModeSupported:AVCaptureFlashModeAuto]) {
+                [_captureDevice setFlashMode:AVCaptureFlashModeAuto];
+            }
+            if ([_captureDevice isFocusModeSupported:AVCaptureFocusModeContinuousAutoFocus]) {
+                
+                [_captureDevice setFocusMode:AVCaptureFocusModeContinuousAutoFocus];
+            }
+            if ([_captureDevice isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeAutoWhiteBalance]) {
+                [_captureDevice setWhiteBalanceMode:AVCaptureWhiteBalanceModeAutoWhiteBalance];
+            }
+            
+            if ([_captureDevice isExposureModeSupported:AVCaptureExposureModeContinuousAutoExposure]) {
+                CGPoint exposurePoint = CGPointMake(0.5f, 0.5f); // 曝光点为中心
+                [_captureDevice setExposurePointOfInterest:exposurePoint];
+                [_captureDevice setExposureMode:AVCaptureExposureModeContinuousAutoExposure];
+            }
+            [_captureDevice unlockForConfiguration];
+        }
+    }
+    return _captureDevice;
+}
+
+-(AVCaptureDeviceInput *)captureDeviceInput{
+    
+    if (!_captureDeviceInput) {
+        
+        _captureDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:self.captureDevice error:nil];
+    }
+    return _captureDeviceInput;
+}
 
 - (void)setup{
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleStatusBarOrientationDidChange:)
                                                  name:UIApplicationDidChangeStatusBarOrientationNotification
-                                               object:nil
-     ];
+                                               object:nil];
 
-    self.session = [[AVCaptureSession alloc] init];
     // 实例化预览图层, 传递_session是为了告诉图层将来显示什么内容
-    self.previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:_session];
-    
-    // 1、获取摄像设备
-    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-
-    if ([device lockForConfiguration:nil]) {
-        
-        if ([device isFlashModeSupported:AVCaptureFlashModeAuto]) {
-            [device setFlashMode:AVCaptureFlashModeAuto];
-        }
-        if ([device isFocusModeSupported:AVCaptureFocusModeContinuousAutoFocus]) {
-            
-            [device setFocusMode:AVCaptureFocusModeContinuousAutoFocus];
-        }
-        if ([device isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeAutoWhiteBalance]) {
-            [device setWhiteBalanceMode:AVCaptureWhiteBalanceModeAutoWhiteBalance];
-        }
-        
-        if ([device isExposureModeSupported:AVCaptureExposureModeContinuousAutoExposure]) {
-            CGPoint exposurePoint = CGPointMake(0.5f, 0.5f); // 曝光点为中心
-            [device setExposurePointOfInterest:exposurePoint];
-            [device setExposureMode:AVCaptureExposureModeContinuousAutoExposure];
-        }
-
-        
-        [device unlockForConfiguration];
-    }
-    // 2、创建输入流
-    AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
+    self.previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.captureSession];
     
     // 3、创建输出流
     AVCaptureMetadataOutput *output = [[AVCaptureMetadataOutput alloc] init];
@@ -82,13 +108,13 @@
     // 5、初始化链接对象（会话对象）
     // 高质量采集率
     //session.sessionPreset = AVCaptureSessionPreset1920x1080; // 如果二维码图片过小、或者模糊请使用这句代码，注释下面那句代码
-    self.session.sessionPreset = AVCaptureSessionPresetHigh;
+    self.captureSession.sessionPreset = AVCaptureSessionPresetHigh;
     
     // 5.1 添加会话输入
-    [self.session addInput:input];
+    [self.captureSession addInput:self.captureDeviceInput];
     
     // 5.2 添加会话输出
-    [self.session addOutput:output];
+    [self.captureSession addOutput:output];
     
     // 6、设置输出数据类型，需要将元数据输出添加到会话后，才能指定元数据类型，否则会报错
     // 设置扫码支持的编码格式(如下设置条形码和二维码兼容)
@@ -170,22 +196,22 @@
 
 -(BOOL)isScanning{
 
-    return self.session.isRunning;
+    return self.captureSession.isRunning;
 }
 
 - (void)lt_startRunning{
 
-    if (!self.session.isRunning) {
+    if (!self.captureSession.isRunning) {
         
-        [self.session startRunning];
+        [self.captureSession startRunning];
     }
 }
 
 - (void)lt_stopRunning{
 
-    if (self.session.isRunning) {
+    if (self.captureSession.isRunning) {
         
-        [self.session stopRunning];
+        [self.captureSession stopRunning];
     }
 }
 //
