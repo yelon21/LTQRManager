@@ -83,8 +83,9 @@
 -(AVCaptureDeviceInput *)captureDeviceInput{
     
     if (!_captureDeviceInput) {
-        
-        _captureDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:self.captureDevice error:nil];
+        NSError *error = nil;
+        _captureDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:self.captureDevice error:&error];
+        NSLog(@"error=%@",error);
     }
     return _captureDeviceInput;
 }
@@ -134,9 +135,8 @@
     [metadataObjectTypes addObject:AVMetadataObjectTypeAztecCode];
     [metadataObjectTypes addObject:AVMetadataObjectTypeCode39Mod43Code];
     
-
-    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1){
-    
+    if (@available(iOS 8.0, *)) {
+        
         [metadataObjectTypes addObject:AVMetadataObjectTypeInterleaved2of5Code];
         [metadataObjectTypes addObject:AVMetadataObjectTypeITF14Code];
         [metadataObjectTypes addObject:AVMetadataObjectTypeDataMatrixCode];
@@ -299,5 +299,12 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
         }
         [device unlockForConfiguration];
     }
+}
+
+#pragma mark check
++ (void)LT_CheckCameraAccess:(void (^)(BOOL granted))handler{
+    
+    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo
+                             completionHandler:handler];
 }
 @end

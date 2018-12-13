@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
-
+//实例化前要判断相机是否可用
 @interface LTQRScanManager : NSObject
 
 @property(nonatomic,assign) CGRect layerFrame;//摄像头内容
@@ -32,4 +32,6 @@
 @property(nonatomic, readonly, getter=isTorchActive) BOOL torchActive;
 
 - (void)lt_turnOnTorch:(BOOL)on;
+#pragma mark check
++ (void)LT_CheckCameraAccess:(void (^)(BOOL granted))handler;
 @end

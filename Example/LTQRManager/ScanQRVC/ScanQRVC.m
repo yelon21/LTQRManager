@@ -21,26 +21,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+}
+
+-(void)viewDidAppear:(BOOL)animated{
     
-    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo
-                             completionHandler:^(BOOL granted) {
-                                 
-                                 if (granted) {
-                                     
-                                     [self.scanManager lt_startRunning];
-                                     [self.maskView lt_startRunning];
-                                 }
-                                 else{
-                                     
-                                     NSLog(@"未授权访问摄像头");
-                                 }
-                             }];
+    [super viewDidAppear:animated];
+    
+    [self startScan];
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    
+    [super viewDidDisappear:animated];
+    
+    if (_scanManager) {
+        
+        [self.scanManager lt_startRunning];
+    }
+    
+    [self.maskView lt_startRunning];
 }
 
 -(void)viewDidLayoutSubviews{
 
-    self.scanManager.layerFrame = self.view.bounds;
+    if (_scanManager) {
+        
+        self.scanManager.layerFrame = self.view.bounds;
+    }
 }
 
 -(LTQRScanManager *)scanManager{
@@ -70,17 +77,33 @@
     [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo
                              completionHandler:^(BOOL granted) {
                                  
-                                 if (granted) {
+                                 dispatch_async(dispatch_get_main_queue(), ^{
                                      
-                                     [self.scanManager lt_startRunning];
-                                     [self.maskView lt_startRunning];
-                                 }
-                                 else{
-                                     
-                                     NSLog(@"未授权访问摄像头");
-                                 }
+                                     if (granted) {
+                                         
+                                         [self.scanManager lt_startRunning];
+                                         [self.maskView lt_startRunning];
+                                     }
+                                     else{
+                                         UIAlertController *viewCon = [UIAlertController alertControllerWithTitle:@"提示"
+                                                                                                          message:@"请打开相机访问权限"
+                                                                                                   preferredStyle:UIAlertControllerStyleAlert];
+                                         
+                                         UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定"
+                                                                                          style:UIAlertActionStyleDefault
+                                                                                        handler:^(UIAlertAction * _Nonnull action) {
+                                                                                            
+                                                                                            [self.navigationController popViewControllerAnimated:YES];
+                                                                                        }];
+                                         
+                                         [viewCon addAction:action];
+                                         
+                                         [self presentViewController:viewCon animated:YES completion:nil];
+                                     }
+                                 });
+                                 
                              }];
-
+    
 }
 
 @end
