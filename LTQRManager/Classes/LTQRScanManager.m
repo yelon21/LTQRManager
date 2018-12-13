@@ -36,7 +36,18 @@
 
     if (self = [super init]) {
         
-        [self setup];
+        [[self class]LT_CheckCameraAccess:^(BOOL granted) {
+            
+            if (granted) {
+                
+                [self setup];
+            }
+            else{
+                
+                NSLog(@"相机权限未打开");
+            }
+        }];
+        
     }
     return self;
 }
