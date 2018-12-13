@@ -45,7 +45,7 @@
 -(void)viewDidLayoutSubviews{
 
     if (_scanManager) {
-        
+    
         self.scanManager.layerFrame = self.view.bounds;
     }
 }

@@ -36,18 +36,7 @@
 
     if (self = [super init]) {
         
-        [[self class]LT_CheckCameraAccess:^(BOOL granted) {
-            
-            if (granted) {
-                
-                [self setup];
-            }
-            else{
-                
-                NSLog(@"相机权限未打开");
-            }
-        }];
-        
+        [self setup];
     }
     return self;
 }
@@ -122,8 +111,15 @@
     //session.sessionPreset = AVCaptureSessionPreset1920x1080; // 如果二维码图片过小、或者模糊请使用这句代码，注释下面那句代码
     self.captureSession.sessionPreset = AVCaptureSessionPresetHigh;
     
-    // 5.1 添加会话输入
-    [self.captureSession addInput:self.captureDeviceInput];
+    if (self.captureDeviceInput) {
+        
+        // 5.1 添加会话输入
+        [self.captureSession addInput:self.captureDeviceInput];
+    }
+    else{
+        
+        NSLog(@"相机权限不可用");
+    }
     
     // 5.2 添加会话输出
     [self.captureSession addOutput:output];
