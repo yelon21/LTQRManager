@@ -65,6 +65,10 @@
                 
                 [_captureDevice setFocusMode:AVCaptureFocusModeContinuousAutoFocus];
             }
+            if ([_captureDevice isFocusModeSupported:AVCaptureFocusModeContinuousAutoFocus]) {
+                
+                [_captureDevice setFocusMode:AVCaptureFocusModeContinuousAutoFocus];
+            }
             if ([_captureDevice isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeAutoWhiteBalance]) {
                 [_captureDevice setWhiteBalanceMode:AVCaptureWhiteBalanceModeAutoWhiteBalance];
             }
