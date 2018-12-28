@@ -18,9 +18,7 @@
 
 
 
-+ (id)LT_ShowInView:(UIView *)view;
-
-- (void)lt_ShowInView:(UIView *)view;
++ (id)LT_ShowInView:(UIView *)view cameraNotAvailableBlock:(dispatch_block_t)cameraNotAvailable;
 
 @property(nonatomic,assign,readonly) BOOL isScanning;//正在扫描
 //开始扫描

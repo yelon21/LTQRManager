@@ -31,15 +31,6 @@
 
     [self.previewLayer removeFromSuperlayer];
 }
-
--(instancetype)init{
-
-    if (self = [super init]) {
-        
-        [self setup];
-    }
-    return self;
-}
 //getter
 -(AVCaptureSession *)captureSession{
     
@@ -179,7 +170,7 @@
     }
 }
 
-+ (id)LT_ShowInView:(UIView *)view{
++ (id)LT_ShowInView:(UIView *)view cameraNotAvailableBlock:(dispatch_block_t)cameraNotAvailable{
 
     if (!view || ![view isKindOfClass:[UIView class]]) {
         
@@ -188,7 +179,23 @@
     
     LTQRScanManager *manager = [[LTQRScanManager alloc]init];
     
-    [manager lt_ShowInView:view];
+    [LTQRScanManager LT_CheckCameraAccess:^(BOOL granted) {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            if (granted) {
+                
+                [manager setup];
+                [manager lt_ShowInView:view];
+            }
+            else{
+                
+                if (cameraNotAvailable) {
+                    cameraNotAvailable();
+                }
+            }
+        });
+    }];
     
     return manager;
 }
