@@ -280,8 +280,6 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
             
             AVMetadataMachineReadableCodeObject *obj = metadataObjects[0];
             
-            NSLog(@"metadataObjects = %@", metadataObjects);
-            
             self.BlockDidDecodeResult(self,obj.stringValue);
         }
     }

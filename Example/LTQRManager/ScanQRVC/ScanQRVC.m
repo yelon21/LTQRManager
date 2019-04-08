@@ -80,7 +80,6 @@
             
             [manager lt_stopRunning];
             [weakSelf.maskView lt_stopRunning];
-            NSLog(@"result=%@",result);
         }];
     }
     return _scanManager;

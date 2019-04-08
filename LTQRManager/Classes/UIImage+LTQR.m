@@ -100,7 +100,9 @@
     CGContextRelease(bitmapRef);
     CGImageRelease(bitmapImage);
     CGColorSpaceRelease(colorSpace);
-    return [UIImage imageWithCGImage:scaledImage];
+    UIImage *resultImg = [UIImage imageWithCGImage:scaledImage];
+    CGImageRelease(scaledImage);
+    return resultImg;
 }
 
 /**
@@ -137,18 +139,14 @@
     // 取得识别结果
     NSArray *features = [detector featuresInImage:[CIImage imageWithCGImage:self.CGImage]];
     
-    NSLog(@"扫描结果 － － %@", features);
-    
     for (CIQRCodeFeature *feature in features) {
         
         NSString *scannedResult = feature.messageString;
-        NSLog(@"result:%@",scannedResult);
     }
     
     for (CIQRCodeFeature *feature in features) {
         
         NSString *scannedResult = feature.messageString;
-        NSLog(@"result:%@",scannedResult);
         return scannedResult;
     }
     

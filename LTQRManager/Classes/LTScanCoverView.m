@@ -41,7 +41,6 @@
 
 -(void)layoutSubviews{
 
-    NSLog(@"layoutSubviews");
     [self updatePath];
 }
 
